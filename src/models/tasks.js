@@ -15,7 +15,10 @@ const TaskSchema = new mongoose.Schema({
   status: { 
     type: String, 
     // Parte 5: Validaciones de datos
-    enum: ['pending', 'in_progress', 'done'], // Restricción de valores permitidos
+    enum: {
+      values: ['pending', 'in_progress', 'done'],
+      message: '{VALUE} no es un estado válido'
+    },
     default: 'pending' 
   },
   
