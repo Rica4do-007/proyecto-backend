@@ -38,14 +38,25 @@ exports.actualizarTarea = async (req, res) => {
     const tarea = await Task.findOneAndUpdate(
       { _id: req.params.id, user_id: req.user.id }, // Validación de propiedad
       req.body, 
-      { new: true } 
+      { new: true, runValidators: true } // <-- ¡AQUÍ LO AÑADES! Esto obligará a validar el enum
     );
 
     if (!tarea) return res.status(404).json({ mensaje: "Tarea no encontrada" });
     res.json({ mensaje: "Tarea actualizada", tarea });
   } catch (error) {
     // Parte 6: Manejo de Errores
-    res.status(500).json({ mensaje: "Error al actualizar", error: error.message });
+    // Como ahora Mongoose lanzará un error de validación (400), puedes atraparlo aquí de forma consistente
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ 
+        error: true, 
+        message: error.message // Ej: "terminado no es un estado válido"
+      });
+    }
+
+    res.status(500).json({ 
+      error: true, 
+      message: "Error al actualizar" 
+    });
   }
 };
 
