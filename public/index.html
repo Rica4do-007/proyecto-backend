@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrillUp - Gestión de Tareas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/logo" href="../images/drillup.png">
+</head>
+<body>
+
+    <div class="container">
+        <h1>DrillUp</h1>
+
+        <div id="register-section">
+            <h2>Crear Cuenta</h2>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="reg-email" placeholder="nuevo@drillup.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="reg-password" placeholder="******">
+            </div>
+            <button onclick="register()">Registrarme</button>
+            <p style="text-align: center; margin-top: 15px;">
+                ¿Ya tienes cuenta? <a href="#" onclick="toggleAuth()">Inicia sesión aquí</a>
+            </p>
+        </div>
+
+        <div id="login-section" class="hidden">
+            <h2>Acceso Cuenta</h2>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="ejemplo@drillup.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" placeholder="******">
+            </div>
+            <button onclick="login()">Iniciar Sesión</button>
+            <p style="text-align: center; margin-top: 15px;">
+                ¿No tienes cuenta? <a href="#" onclick="toggleAuth()">Regístrate aquí</a>
+            </p>
+        </div>
+
+        <div id="tasks-section" class="hidden">
+            <h2>Panel de Entrenamiento</h2>
+            <div id="add-task-form">
+                <h3>Nueva Tarea de Entrenamiento</h3>
+                <input type="text" id="task-title" placeholder="Nombre del ejercicio">
+                <input type="text" id="task-desc" placeholder="Descripción o repeticiones">
+                <button onclick="crearTarea()">Añadir Tarea</button>
+            </div>
+            <div id="tasks-container"></div>
+            <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

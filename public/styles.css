@@ -1,0 +1,165 @@
+/* Paleta de colores inspirada en DrillUp */
+:root {
+    --primary-color: #e63946;    /* Rojo deportivo */
+    --secondary-color: #1d3557;  /* Azul oscuro profundo */
+    --background-light: #f1faee; /* Fondo suave */
+    --text-dark: #1d3557;
+    --white: #ffffff;
+    --gray: #6c757d;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    min-height: 100vh;      /* Ocupa todo el alto de la pantalla */
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: linear-gradient(rgba(29, 53, 87, 0.7), rgba(29, 53, 87, 0.7)), 
+                    url('images/sports_bgimg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.95); /* Blanco casi sólido */
+    backdrop-filter: blur(5px); /* Efecto de cristal esmerilado */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 50px; /* Espacio extra abajo */
+}
+
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1px;
+}
+h2 {
+    text-align: center;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Estilos de Formulario */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Evita que el input se salga del contenedor */
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #c12a36;
+}
+
+/* Tarjetas de Tareas */
+.card {
+    background: var(--white);
+    border-left: 5px solid var(--primary-color);
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+.card h3 {
+    margin: 0 0 5px 0;
+    color: var(--secondary-color);
+}
+
+.actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap; /* Por si los botones son muy largos en móvil */
+}
+
+/* Ajuste para los botones pequeños dentro de las tarjetas */
+.actions button {
+    width: auto; /* Para que no ocupen todo el ancho como los de login */
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+}
+
+.actions .btn-proceso { background-color: var(--gray); }
+.actions .btn-hecho { background-color: #2a9d8f; } /* Un verde deportivo */
+
+.delete-btn {
+    background-color: #e63946 !important;
+    color: white;
+}
+
+/* Colores para los textos de estado */
+.status-pendiente { color: #f4a261; font-weight: bold; }
+.status-en-progreso { color: #219ebc; font-weight: bold; }
+.status-completado { color: #2a9d8f; font-weight: bold; }
+
+.hidden {
+    display: none;
+}
+
+.logout-btn {
+    background-color: var(--secondary-color);
+    margin-top: 20px;
+}
+
+.task-card h3 {
+    margin: 0 0 10px 0;
+    color: var(--secondary-color);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    background: #e9ecef;
+    color: #495057;
+}
+
+.hidden {
+    display: none;
+}
+
+.logout-btn {
+    background-color: var(--secondary-color);
+    margin-top: 20px;
+}
