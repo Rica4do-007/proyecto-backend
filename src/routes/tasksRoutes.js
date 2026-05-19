@@ -10,7 +10,7 @@ const auth = require('../middlewares/authMiddleware');
 router.post('/', auth, taskControllers.crearTarea);
 
 // Paso 10: Obtener tareas del usuario (GET /app/tasks)
-router.get('/:id', auth, taskControllers.obtenerTareas);
+router.get('/', auth, taskControllers.obtenerTareas);
 
 // Paso 11: Actualizar tarea (PUT /app/tasks/:id)
 router.put('/:id', auth, taskControllers.actualizarTarea);

@@ -64,15 +64,17 @@ async function crearTarea() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ title, description, status: 'pendiente' })
+        // CORRECCIÓN 1: Enviamos 'pending' para pasar la validación del backend
+        body: JSON.stringify({ title, description, status: 'pending' })
     });
 
     if (res.ok) {
-        document.getElementById('task-title').value = ''; // Limpia el input
+        document.getElementById('task-title').value = ''; 
         document.getElementById('task-desc').value = '';
         cargarTareas(); // Recarga la lista automáticamente
     } else {
-        alert("Error al crear la tarea");
+        const errorData = await res.json().catch(() => ({}));
+        alert(`Error al crear la tarea: ${errorData.message || "Campos inválidos"}`);
     }
 }
 
@@ -85,26 +87,33 @@ async function cargarTareas() {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        const tareas = await res.json();
+        if (!res.ok) return;
+
+        const data = await res.json();
         const container = document.getElementById('tasks-container');
+        if (!container) return;
         container.innerHTML = '';
 
-        tareas.forEach(t => {
-    container.innerHTML += `
-        <div class="card">
-            <h3>${t.title}</h3>
-            <p>${t.description || 'Sin descripción'}</p>
-            <p><strong>Estado:</strong> <span class="status-${t.status}">${t.status}</span></p>
-            
-            <div class="actions">
-                <button onclick="actualizarEstado('${t._id}', 'en progreso')">⏳ Proceso</button>
-                <button onclick="actualizarEstado('${t._id}', 'completado')">✅ Hecho</button>
-                <button class="delete-btn" onclick="eliminarTarea('${t._id}')">🗑️ Borrar</button>
-            </div>
-        </div>
-    `;
-});
+        // CORRECCIÓN 2: Extrae el arreglo sin importar si viene como data.tasks, data.tareas o directo
+        const listaDeTareas = data.tasks || data.tareas || data.data || (Array.isArray(data) ? data : null); 
 
+        if (listaDeTareas && Array.isArray(listaDeTareas)) {
+            listaDeTareas.forEach(t => {
+                container.innerHTML += `
+                    <div class="card">
+                        <h3>${t.title}</h3>
+                        <p>${t.description || 'Sin descripción'}</p>
+                        <p><strong>Estado:</strong> <span class="status-${t.status}">${t.status}</span></p>
+                        
+                        <div class="actions">
+                            <button onclick="actualizarEstado('${t._id}', 'in_progress')">⏳ Proceso</button>
+                            <button onclick="actualizarEstado('${t._id}', 'done')">✅ Hecho</button>
+                            <button class="delete-btn" onclick="eliminarTarea('${t._id}')">🗑️ Borrar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
     } catch (error) {
         console.error("Error cargando tareas:", error);
     }
@@ -125,7 +134,7 @@ async function actualizarEstado(id, nuevoEstado) {
         });
 
         if (res.ok) {
-            cargarTareas(); // Recargamos la lista para ver el cambio
+            cargarTareas(); 
         } else {
             alert("Error al actualizar el estado");
         }
