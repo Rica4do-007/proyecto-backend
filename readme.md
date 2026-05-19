@@ -26,31 +26,31 @@ Para ejecutar este proyecto localmente, sigue estos pasos:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone [https://github.com/TU_USUARIO/TU_REPOSITORIO.git](https://github.com/TU_USUARIO/TU_REPOSITORIO.git)
+   git clone [https://github.com/TU_USUARIO/TU_REPOSITORIO.git](https://github.com/Rica4do-007/proyecto-backend.git)
    cd proyecto-backend
 
 2. **Instalar dependencias:**
-    '''bash
+    ```bash
     npm install
 
 3. **Configurar las variables de entorno:**
    Crea un archivo .env en la raíz del proyecto y añade tus credenciales:
-   '''code snippet 
+   ```code snippet 
    PORT=3000
    MONGO_URI=tu_cadena_de_conexion_a_mongodb
    JWT_SECRET=tu_clave_secreta_para_tokens
 
 4. **Iniciar servidor:**
-   '''bash
+   ```bash
    npm start
 
 ## 📸 Evidencia de Pruebas (Postman)
 
 ### 1. Validación de Campos Obligatorios (Crear Tarea sin Título)
-![Validación de Título](./screenshots/Validacion1.png)
+![Validación de Título](./Screenshots/Validacion1.png)
 
 ### 2. Validación de Formato de Email (Registro Erróneo)
-![Validación de Email](./screenshots/Validacion2.png)
+![Validación de Email](./Screenshots/Validacion2.png)
 
 ### 3. Validación de Valores Permitidos para el Estado (Status)
-![Validación de Estado](./screenshots/Validacion3.png)
+![Validación de Estado](./Screenshots/Validacion3.png)
