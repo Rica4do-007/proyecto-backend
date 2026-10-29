@@ -19,11 +19,14 @@ const tasksRoutes = require('./src/routes/tasksRoutes');
 // Permite que el servidor lea el "Body" de tus comandos en PowerShell.
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 4. Ruta de salud (Parte 2 - Paso 2: Verificar que el servidor funciona)
 // Captura recomendada: Ejecuta un GET a /app/health para mostrar { status: "ok" }
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'pages', 'index.html'));
+});
+
 app.get('/app/health', (req, res) => {
     res.json({ status: "ok" });
 });

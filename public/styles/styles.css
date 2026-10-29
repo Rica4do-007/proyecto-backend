@@ -16,7 +16,7 @@ body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-image: linear-gradient(rgba(29, 53, 87, 0.7), rgba(29, 53, 87, 0.7)), 
-                    url('images/sports_bgimg.png');
+                    url('../images/sports_bgimg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
