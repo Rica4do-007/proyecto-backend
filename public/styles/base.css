@@ -1,0 +1,377 @@
+/*base.css*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* --------------------- Header Section Styles --------------------- */
+.header-section {
+  display: flex;
+  align-items: center;
+  background-color: #ff7300;
+  padding: 1em 2em;
+  justify-content: space-between;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  /* space between img and h1 */
+}
+
+.logo-title h1 {
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  color: #153f70;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+.mobile-menu.menu-open {
+  display: flex;
+  /* Override display: none to show the menu */
+  flex-direction: column;
+  /* Stack links vertically */
+  position: absolute;
+  /* Take it out of the normal flow */
+  top: 60px;
+  /* Position it just below the header */
+  left: 0;
+  width: 100%;
+  background-color: #ff7300;
+  /* Use your header color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+nav a {
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 50px;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.1em;
+  border: none;
+  color: #000000;
+  transition: background-color 0.2s ease, box-shadow 0.5s ease, transform 0.5s ease;
+}
+
+nav a:hover {
+  background-color: #a54a00;
+  transform: scale(1.03);
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  /* Space between the profile and menu icons */
+}
+
+.header-icons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.2s ease, box-shadow 0.5s ease, transform 0.5s ease;
+}
+
+.header-icons a:hover {
+  background-color: #a54a00;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-icons img {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+
+/* Responsive adjustments for the gap */
+@media (min-width: 1024px) {
+  .header-icons {
+    width: 150px;
+    /* Example: adjust this value based on your logo size */
+    visibility: visible;
+    justify-content: flex-end;
+    /* Align icons to the right edge of their container */
+  }
+}
+
+/* --------------------- Footer Section Styles --------------------- */
+.footer-section {
+  background-color: #0d0d0d;
+  /* dark background */
+  color: #ffffff;
+  padding: 80px 40px 40px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  gap: 120px;
+}
+
+.footer-content .logo-title h2 {
+  font-family: 'Bebas Neue', Arial, sans-serif;
+  color: #ffffff;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 2.2em;
+}
+
+.footer-content .logo-title img {
+  filter: invert(1);
+  /* Makes logo white */
+}
+
+.information {
+  display: flex;
+  justify-content: space-around;
+  gap: 70px;
+  /* Space between the list columns */
+}
+
+.information .list h3 {
+  color: #ff7300;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  white-space: nowrap;
+  /* Prevents header from breaking into multiple lines */
+}
+
+.information .list ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.information .list li {
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid #555555;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-media {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.social-media img {
+  width: 30px;
+  height: 30px;
+  margin: 0 7px;
+  filter: invert(1);
+  /* Makes icons white */
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  object-fit: contain;
+}
+
+.social-media img:hover {
+  opacity: 1;
+}
+
+.footer-bottom p {
+  font-size: 0.85em;
+  color: #cccccc;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+
+  /* Header Section */
+  .header-section nav {
+    display: none;
+  }
+
+  .mobile-menu.menu-open {
+    display: flex;
+    /* Overrides 'display: none' when JS adds the class */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #ff7300;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+  }
+
+  .logo-title {
+    /* Allow the logo to take only the width it needs */
+    flex-shrink: 0;
+  }
+
+  .header-icons {
+    /* Ensure the icons stay to the right */
+    flex-shrink: 0;
+  }
+
+  .header-icons a:nth-child(2) {
+    display: flex;
+  }
+
+  /* Profile Section */
+  .profile-main {
+    flex-direction: column;
+    /* Stack sidebar and content vertically */
+  }
+
+  .profile-sidebar {
+    width: 100%;
+    /* Take full width */
+    padding: 0;
+    overflow-x: auto;
+    /* Allow horizontal scrolling if links are wide */
+    white-space: nowrap;
+    /* Keep links on one line */
+  }
+
+  .sidebar-link {
+    display: inline-block;
+    /* Make links horizontal */
+    border-radius: 5px;
+    /* Remove rounded corners on mobile */
+  }
+
+  .main-content-area {
+    padding: 20px 15px;
+    max-width: 100%;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    justify-content: center;
+    /* Overrides flex-end to center the content block */
+    padding: 3em 1em;
+    /* Adjust padding for better look on small devices */
+  }
+
+  /* Center the text inside the content block on mobile */
+  .hero-content {
+    max-width: 100%;
+    /* Ensure it uses all available width */
+    text-align: center;
+    /* Center the text/button */
+  }
+
+  /* Optional: Adjust H1 size for better mobile fit */
+  .hero-content h1 {
+    font-size: 2.5em;
+    /* Scale down the huge text for mobile */
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: 40px 15px;
+  }
+
+  .services-boxes-container {
+    gap: 20px;
+  }
+
+  /* About Us Section */
+  .about-us-section {
+    padding: 40px 15px;
+  }
+
+  .about-content h1 {
+    font-size: 2em;
+  }
+
+  .about-content p {
+    font-size: 1em;
+    color: #333;
+    line-height: 1.6;
+    /* Reduced for better mobile readability */
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+
+  /* Products Section */
+  .products-section {
+    padding: 20px 10px;
+  }
+
+  .products-content h1 {
+    font-size: 2em;
+  }
+
+  .products-content h4 {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+
+  /* Footer Section */
+  .footer-section {
+    padding: 40px 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    /* Centers Logo and Information block horizontally */
+    margin-bottom: 40px;
+  }
+
+  .logo-title {
+    margin-right: 0;
+    /* Remove desktop right margin */
+  }
+
+  .information {
+    flex-direction: column;
+    gap: 30px;
+    /* Space between the stacked list columns */
+    align-items: center;
+    /* Centers the list headers (h3) horizontally */
+    width: 100%;
+  }
+
+  .list {
+    text-align: center;
+    /* Centers the <ul> contents and <h3> */
+  }
+
+  .social-media {
+    margin-bottom: 15px;
+  }
+
+  .social-media img:first-child {
+    margin-left: 0;
+    /* Remove left margin from first social icon on mobile */
+  }
+}

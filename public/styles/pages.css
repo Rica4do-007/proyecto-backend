@@ -1,0 +1,312 @@
+/* pages.css */
+
+/* --- Profile Page Styles --- */
+
+/* 1. Main Container (Enables two columns) */
+.profile-main {
+    display: flex; 
+    min-height: 80vh;
+    background-color: #f7f9f9; 
+}
+
+/* 2. Sidebar (Fixed Column) */
+.profile-sidebar {
+    width: 250px; 
+    padding: 20px 0;
+    flex-shrink: 0; 
+}
+
+.sidebar-link {
+    display: block;
+    text-decoration: none;
+    color: #3c4043;
+    padding: 10px 20px;
+    margin: 5px 0;
+    font-size: 1em; 
+    border-radius: 0 50px 50px 0;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-link:hover {
+    background-color: #e8f0fe; 
+    color: #1a73e8;
+}
+
+.sidebar-link.active {
+    background-color: #e8f0fe; 
+    color: #1a73e8;
+    font-weight: 600;
+}
+
+/* 3. Main Content Area (Remaining Space) */
+.main-content-area {
+    flex-grow: 1;
+    padding: 20px 40px;
+    /* This calc property is great for large screens, but optional if flex-grow is used */
+    max-width: calc(100% - 250px); 
+}
+
+/* Dashboard Card Styling */
+.dashboard-card.quick-links {
+    display: flex;
+    gap: 10px; 
+    padding: 10px 0;
+    margin-top: 15px; 
+    flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+}
+
+.dashboard-card.quick-links a {
+    text-decoration: none;
+    color: #3c4043; /* Dark gray text */
+    background-color: #f1f3f4; /* Light gray pill background */
+    border: none; /* No border for the pill look */
+    padding: 8px 15px;
+    border-radius: 50px; /* Makes them fully rounded pills */
+    transition: background-color 0.2s;
+}
+
+.dashboard-card.quick-links a:hover {
+    background-color: #e8eaed; /* Subtle hover effect */
+}
+
+/* Search Bar Styling */
+.dashboard-search {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none; 
+    box-shadow: none;
+    margin-bottom: 20px; 
+    transition: box-shadow 0.3s;
+}
+
+.dashboard-search:focus {
+    border-color: #1a73e8; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px #1a73e8; 
+}
+
+/* --- Dedicated About Us Page Layout --- */
+
+/* General About Content Enhancements */
+.about-page-main {
+    width: 100%;
+    min-height: 80vh;
+    padding: 80px 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center; /* This line should already be here, but let's confirm */
+    background-color: #fcfbf9;
+}
+
+.about-content {
+    /* Increase max-width slightly for more room, if needed */
+    max-width: 1000px; 
+    text-align: left; /* Default text alignment should be left for readability */
+}
+
+
+
+.mission-statement {
+    /* Add a small margin at the bottom to separate it from the image block */
+    margin-bottom: 40px; 
+    /* Use a slightly different background or border to frame the text */
+    padding: 20px;
+    background-color: #ffffff; /* Use white background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mission-image-wrapper {
+    /* Set the border here. The border will now surround the entire wrapper content. */
+    border-left: 5px solid #ff7300; 
+    padding-left: 20px; /* Add space between the orange line and the content */
+    margin-bottom: 40px; /* Add space below the whole wrapper */
+}
+
+.mission-statement h1 {
+    /* Ensure the heading is clearly visible and large */
+    font-size: 2.8em; 
+    color: #153f70; /* Your brand blue for the main heading */
+    margin-bottom: 15px;
+}
+
+.mission-statement h4 {
+    /* Adjust the text size for readability */
+    font-size: 1.15em;
+    line-height: 1.6;
+    color: #333;
+    font-weight: 400; /* Use normal weight for paragraph text */
+}
+
+.about-image-block {
+    /* Change the top margin to remove the gap left by the old mission statement margin */
+    margin-top: 20px; 
+    margin-bottom: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-image-block img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Core Pillars Grid */
+.values-section h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #153f70; /* Your brand blue */
+}
+
+.pillar-grid {
+    display: grid;
+    /* 3 columns on desktop, wrap to 1 or 2 on mobile */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.pillar-card {
+    background-color: #f4f4f4; 
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.pillar-card .icon {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Call to Action (CTA) Block */
+.team-cta-block {
+    text-align: center;
+    padding: 40px;
+    background-color: #e8f0fe; /* Light background to draw attention */
+    border-radius: 8px;
+}
+
+.primary-cta-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    background-color: #ff7300;
+    color: white; /* Contrast with the orange */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.primary-cta-btn:hover {
+    background-color: #a54a00;
+}
+
+/* --------------------- Products Section Styles --------------------- */
+.products-section {
+    width: 100%;
+    min-height: 100vh; 
+    background-color: #f4f4f4;
+    padding: 40px 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.products-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.products-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333; /* Dark color */
+    font-weight: 600;
+    text-align: center;
+}
+
+.products-content h4 {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 40px; /* Space before the grid */
+    font-weight: 400;
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    /* Create a responsive grid with a minimum card width of 300px, up to 3 columns */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px; /* Space between cards */
+    margin-bottom: 50px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Slightly more rounded corners */
+    padding: 30px;
+    text-align: left; /* Change to left alignment for professional look */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.product-card h3 {
+    font-size: 1.5em;
+    color: #153f70; /* Your brand blue */
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.product-card p {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.5;
+}
+
+.products-content .final-cta {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+/* 3. Styling the CTA Card (Optional but Recommended) */
+.central-cta {
+    text-align: center; 
+    margin-top: 40px; 
+    margin-bottom: 40px; /* Add margin below the button */
+}
+
+.cta-card {
+    background-color: #ff7300; /* Use your primary brand color to make it stand out */
+    color: white;
+    text-align: center;
+    /* Ensure text within is white */
+}
+
+.cta-card h3 {
+    color: white; 
+}
