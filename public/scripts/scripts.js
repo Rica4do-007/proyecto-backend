@@ -1,5 +1,5 @@
 // 1. Configuración Global
-const API_URL = 'http://localhost:3000/app';
+const API_URL = '/app';
 
 // 2. Funciones de Autenticación (Registro / Login)
 async function register() {

@@ -6,6 +6,7 @@ const auth = require('./src/middlewares/authMiddleware');
 require('dotenv').config();
 
 const app = express();
+const landingPage = path.join(__dirname, 'public', 'pages', 'index.html');
 
 // 1. Conexión a la base de datos (Parte 1: Configuración de MongoDB)
 // Esta parte asegura que los modelos de la Parte 3 y 4 funcionen correctamente.
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 4. Ruta de salud (Parte 2 - Paso 2: Verificar que el servidor funciona)
 // Captura recomendada: Ejecuta un GET a /app/health para mostrar { status: "ok" }
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'pages', 'index.html'));
+    res.sendFile(landingPage);
 });
 
 app.get('/app/health', (req, res) => {
