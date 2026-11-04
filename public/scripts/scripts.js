@@ -60,7 +60,7 @@ async function crearTarea() {
 
     const res = await fetch(`${API_URL}/tasks`, {
         method: 'POST',
-        headers: { 
+        headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
@@ -69,7 +69,7 @@ async function crearTarea() {
     });
 
     if (res.ok) {
-        document.getElementById('task-title').value = ''; 
+        document.getElementById('task-title').value = '';
         document.getElementById('task-desc').value = '';
         cargarTareas(); // Recarga la lista automáticamente
     } else {
@@ -95,7 +95,7 @@ async function cargarTareas() {
         container.innerHTML = '';
 
         // CORRECCIÓN 2: Extrae el arreglo sin importar si viene como data.tasks, data.tareas o directo
-        const listaDeTareas = data.tasks || data.tareas || data.data || (Array.isArray(data) ? data : null); 
+        const listaDeTareas = data.tasks || data.tareas || data.data || (Array.isArray(data) ? data : null);
 
         if (listaDeTareas && Array.isArray(listaDeTareas)) {
             listaDeTareas.forEach(t => {
@@ -122,11 +122,11 @@ async function cargarTareas() {
 // Función para cambiar el estado de la tarea
 async function actualizarEstado(id, nuevoEstado) {
     const token = localStorage.getItem('token');
-    
+
     try {
         const res = await fetch(`${API_URL}/tasks/${id}`, {
             method: 'PUT',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
@@ -134,7 +134,7 @@ async function actualizarEstado(id, nuevoEstado) {
         });
 
         if (res.ok) {
-            cargarTareas(); 
+            cargarTareas();
         } else {
             alert("Error al actualizar el estado");
         }
@@ -146,9 +146,9 @@ async function actualizarEstado(id, nuevoEstado) {
 // Función para eliminar la tarea
 async function eliminarTarea(id) {
     if (!confirm("¿Estás seguro de que quieres eliminar esta tarea?")) return;
-    
+
     const token = localStorage.getItem('token');
-    
+
     try {
         const res = await fetch(`${API_URL}/tasks/${id}`, {
             method: 'DELETE',

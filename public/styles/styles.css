@@ -1,8 +1,11 @@
 /* Paleta de colores inspirada en DrillUp */
 :root {
-    --primary-color: #e63946;    /* Rojo deportivo */
-    --secondary-color: #1d3557;  /* Azul oscuro profundo */
-    --background-light: #f1faee; /* Fondo suave */
+    --primary-color: #e63946;
+    /* Rojo deportivo */
+    --secondary-color: #1d3557;
+    /* Azul oscuro profundo */
+    --background-light: #f1faee;
+    /* Fondo suave */
     --text-dark: #1d3557;
     --white: #ffffff;
     --gray: #6c757d;
@@ -10,27 +13,33 @@
 
 body {
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center;     /* Centra verticalmente */
-    min-height: 100vh;      /* Ocupa todo el alto de la pantalla */
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    min-height: 100vh;
+    /* Ocupa todo el alto de la pantalla */
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: linear-gradient(rgba(29, 53, 87, 0.7), rgba(29, 53, 87, 0.7)), 
-                    url('../images/sports_bgimg.png');
+    background-image: linear-gradient(rgba(29, 53, 87, 0.7), rgba(29, 53, 87, 0.7)),
+        url('../images/sports_bgimg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.95); /* Blanco casi sólido */
-    backdrop-filter: blur(5px); /* Efecto de cristal esmerilado */
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Blanco casi sólido */
+    backdrop-filter: blur(5px);
+    /* Efecto de cristal esmerilado */
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 450px;
-    margin-bottom: 50px; /* Espacio extra abajo */
+    margin-bottom: 50px;
+    /* Espacio extra abajo */
 }
 
 h1 {
@@ -39,6 +48,7 @@ h1 {
     color: var(--primary-color);
     margin-bottom: 1px;
 }
+
 h2 {
     text-align: center;
     color: var(--secondary-color);
@@ -62,7 +72,8 @@ input {
     padding: 12px;
     border: 2px solid #ddd;
     border-radius: 6px;
-    box-sizing: border-box; /* Evita que el input se salga del contenedor */
+    box-sizing: border-box;
+    /* Evita que el input se salga del contenedor */
     transition: border-color 0.3s ease;
 }
 
@@ -95,7 +106,7 @@ button:hover {
     padding: 15px;
     margin-top: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
 }
 
@@ -108,19 +119,28 @@ button:hover {
     margin-top: 15px;
     display: flex;
     gap: 8px;
-    flex-wrap: wrap; /* Por si los botones son muy largos en móvil */
+    flex-wrap: wrap;
+    /* Por si los botones son muy largos en móvil */
 }
 
 /* Ajuste para los botones pequeños dentro de las tarjetas */
 .actions button {
-    width: auto; /* Para que no ocupen todo el ancho como los de login */
+    width: auto;
+    /* Para que no ocupen todo el ancho como los de login */
     padding: 6px 12px;
     font-size: 0.85rem;
     border-radius: 4px;
 }
 
-.actions .btn-proceso { background-color: var(--gray); }
-.actions .btn-hecho { background-color: #2a9d8f; } /* Un verde deportivo */
+.actions .btn-proceso {
+    background-color: var(--gray);
+}
+
+.actions .btn-hecho {
+    background-color: #2a9d8f;
+}
+
+/* Un verde deportivo */
 
 .delete-btn {
     background-color: #e63946 !important;
@@ -128,9 +148,20 @@ button:hover {
 }
 
 /* Colores para los textos de estado */
-.status-pendiente { color: #f4a261; font-weight: bold; }
-.status-en-progreso { color: #219ebc; font-weight: bold; }
-.status-completado { color: #2a9d8f; font-weight: bold; }
+.status-pendiente {
+    color: #f4a261;
+    font-weight: bold;
+}
+
+.status-en-progreso {
+    color: #219ebc;
+    font-weight: bold;
+}
+
+.status-completado {
+    color: #2a9d8f;
+    font-weight: bold;
+}
 
 .hidden {
     display: none;

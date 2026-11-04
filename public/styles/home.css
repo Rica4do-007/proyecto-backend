@@ -15,7 +15,7 @@
   color: white;
   padding: 3em;
 }
-  
+
 .hero-section::before {
   content: "";
   position: absolute;
@@ -25,24 +25,25 @@
   height: 100%;
   z-index: 0;
 }
-  
+
 .hero-content {
   position: relative;
-  max-width: 500px; /* Limit the width of the content */
+  max-width: 500px;
+  /* Limit the width of the content */
   z-index: 1;
   text-align: center;
 }
-  
+
 .hero-content h1 {
   font-size: 4.5em;
   line-height: 1.2;
 }
-  
+
 .hero-content p {
   font-size: 1.2em;
   margin-bottom: 2em;
 }
-  
+
 .hero-btn {
   display: inline-block;
   padding: 0.8rem 2rem;
@@ -65,7 +66,7 @@
   padding: 60px 20px;
   background-color: #ffffff;
   text-align: center;
-  position: relative; 
+  position: relative;
   overflow: hidden;
   z-index: 1;
 }
@@ -95,14 +96,14 @@
   background-color: #f4f4f4;
   border-radius: 8px;
   padding: 30px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
 }
 
 .service-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .service-box h3 {
@@ -123,32 +124,38 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: relative; 
-  overflow: hidden; 
+  position: relative;
+  overflow: hidden;
   z-index: 1;
 }
 
 .about-us-section::before {
   content: "";
   position: absolute;
-  top: -50px; /* Move slightly off-screen */
+  top: -50px;
+  /* Move slightly off-screen */
   left: -50px;
   width: 250px;
   height: 250px;
-  background-color: #ff7300; /* Your brand orange */
-  border-radius: 50%; /* Makes it a circle */
-  opacity: 0.1; /* Make it very faint */
-  z-index: -1; /* Place behind the content */
+  background-color: #ff7300;
+  /* Your brand orange */
+  border-radius: 50%;
+  /* Makes it a circle */
+  opacity: 0.1;
+  /* Make it very faint */
+  z-index: -1;
+  /* Place behind the content */
 }
 
 .about-content {
-  max-width: 800px; /* Limit the width of the content */
+  max-width: 800px;
+  /* Limit the width of the content */
   width: 100%;
   padding: 20px;
   margin: 0 auto;
   line-height: 1.6;
   color: #333;
-} 
+}
 
 .about-content h1 {
   font-size: 2.8em;
@@ -160,7 +167,8 @@
 .about-content p {
   font-size: 1.1em;
   line-height: 1.7;
-  color: #333; /* Dark gray for high contrast */
+  color: #333;
+  /* Dark gray for high contrast */
   margin-top: 30px;
   margin-bottom: 0;
 }
@@ -168,19 +176,23 @@
 /* --- New About Section Button Style --- */
 
 .about-btn {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    background-color: #ff7300; /* Orange background */
-    color: white; /* White text for contrast */
-    text-decoration: none;
-    font-size: 1.1em;
-    border-radius: 5px;
-    margin-top: 30px; /* Space it below the text */
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    font-weight: 600;
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #ff7300;
+  /* Orange background */
+  color: white;
+  /* White text for contrast */
+  text-decoration: none;
+  font-size: 1.1em;
+  border-radius: 5px;
+  margin-top: 30px;
+  /* Space it below the text */
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .about-btn:hover {
-    background-color: #a54a00; /* Darker orange on hover */
+  background-color: #a54a00;
+  /* Darker orange on hover */
 }
