@@ -14,7 +14,7 @@ body {
 .header-section {
   display: flex;
   align-items: center;
-  background-color: #ff7300;
+  background-color: #f95738;
   padding: 1em 2em;
   justify-content: space-between;
 }
@@ -28,7 +28,7 @@ body {
 
 .logo-title h1 {
   font-family: 'Bebas Neue', Arial, sans-serif;
-  color: #153f70;
+  color: #0d3b66;
   letter-spacing: 2px;
   font-weight: 400;
 }
@@ -44,7 +44,7 @@ body {
   /* Position it just below the header */
   left: 0;
   width: 100%;
-  background-color: #ff7300;
+  background-color: #f95738;
   /* Use your header color */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 100;
@@ -153,7 +153,7 @@ nav a:hover {
 }
 
 .information .list h3 {
-  color: #ff7300;
+  color: #f95738;
   margin-bottom: 20px;
   font-size: 1.1em;
   white-space: nowrap;
@@ -225,7 +225,7 @@ nav a:hover {
     top: 60px;
     left: 0;
     width: 100%;
-    background-color: #ff7300;
+    background-color: #f95738;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 100;
   }
