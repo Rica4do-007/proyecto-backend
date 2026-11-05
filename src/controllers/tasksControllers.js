@@ -13,10 +13,10 @@ exports.crearTarea = async (req, res) => {
     });
 
     await nuevaTarea.save();
-    res.status(201).json({ mensaje: "Tarea creada con éxito", tarea: nuevaTarea });
+    res.status(201).json({ mensaje: "Task created successfully", tarea: nuevaTarea });
   } catch (error) {
     // Parte 6: Manejo de Errores
-    res.status(500).json({ mensaje: "Error al crear la tarea", error: error.message });
+    res.status(500).json({ mensaje: "Error creating task", error: error.message });
   }
 };
 
@@ -28,7 +28,7 @@ exports.obtenerTareas = async (req, res) => {
     res.json(tareas);
   } catch (error) {
     // Parte 6: Manejo de Errores
-    res.status(500).json({ mensaje: "Error al obtener tareas", error: error.message });
+    res.status(500).json({ mensaje: "Error retrieving tasks", error: error.message });
   }
 };
 
@@ -41,8 +41,8 @@ exports.actualizarTarea = async (req, res) => {
       { new: true, runValidators: true } // <-- ¡AQUÍ LO AÑADES! Esto obligará a validar el enum
     );
 
-    if (!tarea) return res.status(404).json({ mensaje: "Tarea no encontrada" });
-    res.json({ mensaje: "Tarea actualizada", tarea });
+    if (!tarea) return res.status(404).json({ mensaje: "Task not found" });
+    res.json({ mensaje: "Task updated", tarea });
   } catch (error) {
     // Parte 6: Manejo de Errores
     // Como ahora Mongoose lanzará un error de validación (400), puedes atraparlo aquí de forma consistente
@@ -55,7 +55,7 @@ exports.actualizarTarea = async (req, res) => {
 
     res.status(500).json({ 
       error: true, 
-      message: "Error al actualizar" 
+      message: "Error updating task" 
     });
   }
 };
@@ -65,10 +65,10 @@ exports.eliminarTarea = async (req, res) => {
   try {
     const tarea = await Task.findOneAndDelete({ _id: req.params.id, user_id: req.user.id });
 
-    if (!tarea) return res.status(404).json({ mensaje: "Tarea no encontrada" });
-    res.json({ mensaje: "Tarea eliminada correctamente" });
+    if (!tarea) return res.status(404).json({ mensaje: "Task not found" });
+    res.json({ mensaje: "Task deleted successfully" });
   } catch (error) {
     // Parte 6: Manejo de Errores
-    res.status(500).json({ mensaje: "Error al eliminar", error: error.message });
+    res.status(500).json({ mensaje: "Error deleting task", error: error.message });
   }
 };

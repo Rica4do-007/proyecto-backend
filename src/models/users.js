@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     lowercase: true, // Convierte el email a minúsculas
     validate: {
       validator: validator.isEmail, // Validación de formato de email
-      message: 'Correo electrónico no válido'
+      message: 'Invalid email format' 
     }
   },
   

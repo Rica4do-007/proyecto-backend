@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
 
   // Parte 6: Manejo de Errores (Token ausente)
   if (!authHeader) {
-    return res.status(401).json({ mensaje: "Acceso denegado, no hay token" });
+    return res.status(401).json({ mensaje: "Access denied, no token provided" });
   }
 
   // El formato suele ser "Bearer TOKEN", así que extraemos solo el token
@@ -24,6 +24,6 @@ module.exports = (req, res, next) => {
     next(); // Continuar a la siguiente función (Controlador)
   } catch (error) {
     // Parte 6: Manejo de Errores (Token inválido o expirado)
-    res.status(400).json({ mensaje: "Token no válido" });
+    res.status(400).json({ mensaje: "Invalid token" });
   }
 };

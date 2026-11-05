@@ -12,10 +12,10 @@ exports.registrarUsuario = async (req, res) => {
     const nuevoUsuario = new User({ email, password });
     await nuevoUsuario.save();
 
-    res.status(201).json({ mensaje: "Usuario registrado con éxito" });
+    res.status(201).json({ mensaje: "User registered successfully" });
   } catch (error) {
     // Parte 6: Manejo de Errores (Campos inválidos o correo duplicado)
-    res.status(400).json({ mensaje: "Error al registrar usuario", error: error.message });
+    res.status(400).json({ mensaje: "Error registering user", error: error.message });
   }
 };
 
@@ -27,13 +27,13 @@ exports.login = async (req, res) => {
     // 1. Verificación de existencia (Seguridad)
     const usuario = await User.findOne({ email });
     if (!usuario) {
-      return res.status(400).json({ mensaje: "Usuario no encontrado" });
+      return res.status(400).json({ mensaje: "User not found" });
     }
 
     // 2. Comparar la contraseña ingresada con el Hash de la base de datos (bcrypt)
     const esValida = await bcrypt.compare(password, usuario.password);
     if (!esValida) {
-      return res.status(400).json({ mensaje: "Contraseña incorrecta" });
+      return res.status(400).json({ mensaje: "Incorrect Password" });
     }
 
     // 3. Generación del Token JWT (Paso 7: Autenticación)
@@ -42,9 +42,9 @@ exports.login = async (req, res) => {
       expiresIn: '1h' 
     });
 
-    res.json({ mensaje: "Login exitoso", token });
+    res.json({ mensaje: "Login successful", token });
   } catch (error) {
     // Parte 6: Manejo de Errores de servidor
-    res.status(500).json({ mensaje: "Error en el servidor", error: error.message });
+    res.status(500).json({ mensaje: "Server error", error: error.message });
   }
 };

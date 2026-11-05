@@ -16,14 +16,14 @@ async function register() {
         const data = await res.json();
 
         if (res.ok) {
-            alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
+            alert("Succesfully registered! Please log in.");
             toggleAuthForms();
         } else {
-            alert(data.message || "Error al registrar");
+            alert(data.message || "Registration failed. Please try again.");
         }
     } catch (error) {
-        console.error("Error en registro:", error);
-        alert("No se pudo conectar con el servidor.");
+        console.error("Registration error:", error);
+        alert("Could not connect to the server. Please try again.");
     }
 }
 
@@ -74,7 +74,7 @@ async function crearTarea() {
         cargarTareas();
     } else {
         const errorData = await res.json().catch(() => ({}));
-        alert(`Error al crear la tarea: ${errorData.message || "Campos inválidos"}`);
+        alert(`Error creating task: ${errorData.message || "Invalid input"}`);
     }
 }
 
@@ -105,9 +105,9 @@ async function cargarTareas() {
                         <p><strong>Estado:</strong> <span class="status-${t.status}">${t.status}</span></p>
                         
                         <div class="actions">
-                            <button class="btn-proceso" onclick="actualizarEstado('${t._id}', 'in_progress')">⏳ Proceso</button>
-                            <button class="btn-hecho" onclick="actualizarEstado('${t._id}', 'done')">✅ Hecho</button>
-                            <button class="delete-btn" onclick="eliminarTarea('${t._id}')">🗑️ Borrar</button>
+                            <button class="btn-proceso" onclick="actualizarEstado('${t._id}', 'in_progress')">⏳ In Progress</button>
+                            <button class="btn-hecho" onclick="actualizarEstado('${t._id}', 'done')">✅ Done</button>
+                            <button class="delete-btn" onclick="eliminarTarea('${t._id}')">🗑️ Delete</button>
                         </div>
                     </div>
                 `;
@@ -134,7 +134,7 @@ async function actualizarEstado(id, nuevoEstado) {
         if (res.ok) {
             cargarTareas();
         } else {
-            alert("Error al actualizar el estado");
+            alert("Error updating status");
         }
     } catch (error) {
         console.error("Error:", error);
@@ -142,7 +142,7 @@ async function actualizarEstado(id, nuevoEstado) {
 }
 
 async function eliminarTarea(id) {
-    if (!confirm("¿Estás seguro de que quieres eliminar esta tarea?")) return;
+    if (!confirm("Are you sure you want to delete this?")) return;
 
     const token = localStorage.getItem('token');
 
@@ -155,7 +155,7 @@ async function eliminarTarea(id) {
         if (res.ok) {
             cargarTareas();
         } else {
-            alert("No se pudo eliminar la tarea");
+            alert("The task could not be deleted. Please try again.");
         }
     } catch (error) {
         console.error("Error:", error);
@@ -185,11 +185,18 @@ function showDashboardView() {
 
 function handleProfileClick() {
     const token = localStorage.getItem('token');
-    if (!token) {
-        showAuthView();
+    if (token) {
+        if (typeof showTaskView === 'function') {
+            showTaskView();
+        } else {
+            window.location.href = 'profile.html';
+        }
     } else {
-        // If already logged in, profile click could take them to dashboard or show session info
-        showDashboardView();
+        if (typeof showAuthView === 'function') {
+            showAuthView();
+        } else {
+            window.location.href = 'auth.html';
+        }
     }
 }
 
@@ -204,24 +211,26 @@ function logout() {
     showLandingView();
 }
 
-// Actualiza dinámicamente el texto del perfil y los botones del hero según la sesión
+// Inside your existing UI management logic or when login state changes:
 function updateUIState() {
     const token = localStorage.getItem('token');
     const profileText = document.getElementById('profile-btn-text');
     const heroButtonsContainer = document.getElementById('hero-buttons-container');
 
     if (token) {
-        // Usuario autenticado
-        if (profileText) profileText.innerText = "Mi Cuenta";
+        // User is LOGGED IN: Change text to account view and show routine buttons
+        if (profileText) profileText.innerText = "My Account";
+        
         if (heroButtonsContainer) {
             heroButtonsContainer.innerHTML = `
                 <button onclick="showDashboardView()" class="hero-btn">Build your Routine</button>
-                <button onclick="alert('Abriendo biblioteca de guías y videos...')" class="hero-btn" style="background-color: var(--secondary-color);">Browse Library</button>
+                <button onclick="alert('Opening library of guides and videos...')" class="hero-btn" style="background-color: var(--secondary-color);">Browse Library</button>
             `;
         }
     } else {
-        // Usuario visitante (no logueado)
+        // User is LOGGED OUT: Show "Sign Up" text and default get started button
         if (profileText) profileText.innerText = "Sign Up";
+        
         if (heroButtonsContainer) {
             heroButtonsContainer.innerHTML = `
                 <button onclick="showAuthView()" class="hero-btn">Get Started</button>
@@ -231,6 +240,6 @@ function updateUIState() {
 }
 
 // 5. Inicialización al cargar la página
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
     updateUIState();
-};
+});
