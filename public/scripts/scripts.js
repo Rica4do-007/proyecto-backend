@@ -17,7 +17,7 @@ async function register() {
 
         if (res.ok) {
             alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
-            toggleAuth();
+            toggleAuthForms();
         } else {
             alert(data.message || "Error al registrar");
         }
@@ -42,7 +42,8 @@ async function login() {
 
         if (res.ok) {
             localStorage.setItem('token', data.token);
-            mostrarSeccionTareas();
+            // After successful login, return to hero landing view with updated routine buttons
+            showLandingView();
         } else {
             alert(data.message || "Credenciales incorrectas");
         }
@@ -64,14 +65,13 @@ async function crearTarea() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        // CORRECCIÓN 1: Enviamos 'pending' para pasar la validación del backend
         body: JSON.stringify({ title, description, status: 'pending' })
     });
 
     if (res.ok) {
         document.getElementById('task-title').value = '';
         document.getElementById('task-desc').value = '';
-        cargarTareas(); // Recarga la lista automáticamente
+        cargarTareas();
     } else {
         const errorData = await res.json().catch(() => ({}));
         alert(`Error al crear la tarea: ${errorData.message || "Campos inválidos"}`);
@@ -94,7 +94,6 @@ async function cargarTareas() {
         if (!container) return;
         container.innerHTML = '';
 
-        // CORRECCIÓN 2: Extrae el arreglo sin importar si viene como data.tasks, data.tareas o directo
         const listaDeTareas = data.tasks || data.tareas || data.data || (Array.isArray(data) ? data : null);
 
         if (listaDeTareas && Array.isArray(listaDeTareas)) {
@@ -106,8 +105,8 @@ async function cargarTareas() {
                         <p><strong>Estado:</strong> <span class="status-${t.status}">${t.status}</span></p>
                         
                         <div class="actions">
-                            <button onclick="actualizarEstado('${t._id}', 'in_progress')">⏳ Proceso</button>
-                            <button onclick="actualizarEstado('${t._id}', 'done')">✅ Hecho</button>
+                            <button class="btn-proceso" onclick="actualizarEstado('${t._id}', 'in_progress')">⏳ Proceso</button>
+                            <button class="btn-hecho" onclick="actualizarEstado('${t._id}', 'done')">✅ Hecho</button>
                             <button class="delete-btn" onclick="eliminarTarea('${t._id}')">🗑️ Borrar</button>
                         </div>
                     </div>
@@ -119,7 +118,6 @@ async function cargarTareas() {
     }
 }
 
-// Función para cambiar el estado de la tarea
 async function actualizarEstado(id, nuevoEstado) {
     const token = localStorage.getItem('token');
 
@@ -143,7 +141,6 @@ async function actualizarEstado(id, nuevoEstado) {
     }
 }
 
-// Función para eliminar la tarea
 async function eliminarTarea(id) {
     if (!confirm("¿Estás seguro de que quieres eliminar esta tarea?")) return;
 
@@ -165,27 +162,75 @@ async function eliminarTarea(id) {
     }
 }
 
-// 4. Utilidades de Interfaz (UI)
-function toggleAuth() {
-    document.getElementById('login-section').classList.toggle('hidden');
-    document.getElementById('register-section').classList.toggle('hidden');
+// 4. Interfaz y Control de Vistas (SPA Flow)
+function showAuthView() {
+    document.getElementById('landing-section').classList.add('hidden');
+    document.getElementById('auth-section').classList.remove('hidden');
+    document.getElementById('tasks-section').classList.add('hidden');
 }
 
-function mostrarSeccionTareas() {
-    document.getElementById('login-section').classList.add('hidden');
-    document.getElementById('register-section').classList.add('hidden');
+function showLandingView() {
+    document.getElementById('auth-section').classList.add('hidden');
+    document.getElementById('tasks-section').classList.add('hidden');
+    document.getElementById('landing-section').classList.remove('hidden');
+    updateUIState();
+}
+
+function showDashboardView() {
+    document.getElementById('landing-section').classList.add('hidden');
+    document.getElementById('auth-section').classList.add('hidden');
     document.getElementById('tasks-section').classList.remove('hidden');
     cargarTareas();
 }
 
-function logout() {
-    localStorage.removeItem('token');
-    location.reload();
+function handleProfileClick() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        showAuthView();
+    } else {
+        // If already logged in, profile click could take them to dashboard or show session info
+        showDashboardView();
+    }
 }
 
-// 5. Inicialización (Verificar si ya hay sesión activa al cargar la página)
-window.onload = () => {
-    if (localStorage.getItem('token')) {
-        mostrarSeccionTareas();
+function toggleAuthForms(event) {
+    if (event) event.preventDefault();
+    document.getElementById('login-sub-section').classList.toggle('hidden');
+    document.getElementById('register-sub-section').classList.toggle('hidden');
+}
+
+function logout() {
+    localStorage.removeItem('token');
+    showLandingView();
+}
+
+// Actualiza dinámicamente el texto del perfil y los botones del hero según la sesión
+function updateUIState() {
+    const token = localStorage.getItem('token');
+    const profileText = document.getElementById('profile-btn-text');
+    const heroButtonsContainer = document.getElementById('hero-buttons-container');
+
+    if (token) {
+        // Usuario autenticado
+        if (profileText) profileText.innerText = "Mi Cuenta";
+        if (heroButtonsContainer) {
+            heroButtonsContainer.innerHTML = `
+                <button onclick="showDashboardView()" class="hero-btn">Build your Routine</button>
+                <button onclick="alert('Abriendo biblioteca de guías y videos...')" class="hero-btn" style="background-color: var(--secondary-color);">Browse Library</button>
+            `;
+        }
+    } else {
+        // Usuario visitante (no logueado)
+        if (profileText) profileText.innerText = "Sign Up";
+        if (heroButtonsContainer) {
+            heroButtonsContainer.innerHTML = `
+                <button onclick="showAuthView()" class="hero-btn">Get Started</button>
+            `;
+        }
     }
+}
+
+// 5. Inicialización al cargar la página
+window.onload = () => {
+    updateUIState();
 };

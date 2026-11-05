@@ -4,62 +4,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DrillUp - Gestión de Tareas</title>
+    <title>DrillUp - Do It Your Way</title>
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/home.css">
     <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="icon" type="image/png" href="/images/drillup.png">
+    <!-- Google Fonts: Bebas Neue for sports-like header font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../logo/drillup.png">
 </head>
 
 <body>
+    <!-- ========================================== -->
+    <!-- VIEW 1: MAIN LANDING PAGE (Visitor / Auth) -->
+    <!-- ========================================== -->
+    <div id="landing-section" class="app-view">
+        <header class="header-section">
+            <div class="logo-title">
+                <img src="../logo/drillup.png" alt="DrillUp Logo" width="50" height="50">
+                <h1>DrillUP</h1>
+            </div>
+            <nav id="mobileNav" class="mobile-menu">
+                <a href="index.html" title="Home">Home</a>
+                <a href="about-us.html" title="About Us">About Us</a>
+                <a href="products.html" title="Products">Products</a>
+            </nav>
+            <div class="header-icons">
+                <!-- Profile / Auth Action Button -->
+                <button id="profile-auth-btn" onclick="handleProfileClick()" class="profile-text-btn"
+                    style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 1rem;">
+                    <img src="../icon/profile.png" alt="Profile" width="35" height="35">
+                    <span id="profile-btn-text">Sign Up</span>
+                </button>
+                <a href="javascript:void(0);" id="menuIcon" title="Open Menu">
+                    <img src="../icon/menu.png" alt="Menu" width="40" height="40">
+                </a>
+            </div>
+        </header>
 
-    <div class="container">
-        <h1>DrillUp</h1>
+        <main class="hero-section">
+            <!-- Background Looping Video -->
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="../images/sports_bg.mp4" type="video/mp4">
+            </video>
 
-        <div id="register-section">
-            <h2>Crear Cuenta</h2>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="reg-email" placeholder="nuevo@drillup.com">
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" id="reg-password" placeholder="******">
-            </div>
-            <button onclick="register()">Registrarme</button>
-            <p style="text-align: center; margin-top: 15px;">
-                ¿Ya tienes cuenta? <a href="#" onclick="toggleAuth()">Inicia sesión aquí</a>
-            </p>
-        </div>
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <h1>Dream Big,<br>Train Smart</h1>
+                <p>Unlock your full potential with the<br> right training, and the right mentors.</p>
 
-        <div id="login-section" class="hidden">
-            <h2>Acceso Cuenta</h2>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="email" placeholder="ejemplo@drillup.com">
+                <div id="hero-buttons-container">
+                    <button onclick="showAuthView()" class="hero-btn">Get Started</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" id="password" placeholder="******">
-            </div>
-            <button onclick="login()">Iniciar Sesión</button>
-            <p style="text-align: center; margin-top: 15px;">
-                ¿No tienes cuenta? <a href="#" onclick="toggleAuth()">Regístrate aquí</a>
-            </p>
-        </div>
+        </main>
 
-        <div id="tasks-section" class="hidden">
-            <h2>Panel de Entrenamiento</h2>
-            <div id="add-task-form">
-                <h3>Nueva Tarea de Entrenamiento</h3>
-                <input type="text" id="task-title" placeholder="Nombre del ejercicio">
-                <input type="text" id="task-desc" placeholder="Descripción o repeticiones">
-                <button onclick="crearTarea()">Añadir Tarea</button>
+        <section class="services-section">
+            <div class="services-content">
+                <h1>Our Services</h1>
+                <div class="service-boxes-container">
+                    <div class="service-box">
+                        <img src="../icon/planlist.png" alt="Personalized Training Plans Icon" width="80" height="80">
+                        <h3>Personalized Training Plans</h3>
+                        <p>Customized workout routines tailored to your sport, fitness level, and goals.</p>
+                    </div>
+                    <div class="service-box">
+                        <img src="../icon/visualCoaching.png" alt="Virtual Coaching Sessions Icon" width="80"
+                            height="80">
+                        <h3>Virtual Coaching Sessions</h3>
+                        <p>One-on-one sessions with expert coaches for guidance and motivation.</p>
+                    </div>
+                    <div class="service-box">
+                        <img src="../icon/equipment.png" alt="Training Equipment Icon" width="80" height="80">
+                        <h3>Training Equipment</h3>
+                        <p>High-quality gear and accessories to support your training needs.</p>
+                    </div>
+                </div>
             </div>
-            <div id="tasks-container"></div>
-            <button class="logout-btn" onclick="logout()">Cerrar Sesión</button>
+        </section>
+
+        <section id="about-us-section" class="about-us-section">
+            <div class="about-content">
+                <h1>Our Mission</h1>
+                <h4>Empowering athletes through personalized plans and expert guidance since 2020.</h4>
+                <p>At DrillUp, we blend science-backed training with a supportive community. Our certified coaches are
+                    dedicated to helping every athlete achieve measurable results.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: AUTHENTICATION (Register / Login)  -->
+    <!-- ========================================== -->
+    <div id="auth-section" class="app-view hidden">
+        <div class="container" style="margin-top: 80px;">
+            <button onclick="showLandingView()"
+                style="background: none; border: none; color: var(--secondary-color); cursor: pointer; font-weight: bold; margin-bottom: 10px;">←
+                Volver al Inicio</button>
+            <h1>DrillUp</h1>
+
+            <div id="register-sub-section">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="reg-email" placeholder="nuevo@drillup.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" placeholder="******">
+                </div>
+                <button onclick="register()">Register</button>
+                <p style="text-align: center; margin-top: 15px;">
+                    Already have an account? <a href="#" onclick="toggleAuthForms(event)">Start Session Here</a>
+                </p>
+            </div>
+
+            <div id="login-sub-section" class="hidden">
+                <h2>Account Access</h2>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="ejemplo@drillup.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="******">
+                </div>
+                <button onclick="login()">Start Session</button>
+                <p style="text-align: center; margin-top: 15px;">
+                    Don't have an account? <a href="#" onclick="toggleAuthForms(event)">Register here</a>
+                </p>
+            </div>
         </div>
     </div>
 
-    <script src="/scripts/scripts.js"></script>
+    <!-- ========================================== -->
+    <!-- VIEW 3: EXERCISE MANAGEMENT (Dashboard)    -->
+    <!-- ========================================== -->
+    <div id="tasks-section" class="app-view hidden">
+        <div class="container" style="max-width: 650px; margin-top: 80px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <button onclick="showLandingView()"
+                    style="background: var(--secondary-color); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">←
+                    Volver al Menú</button>
+                <button class="logout-btn" onclick="logout()" style="width: auto; padding: 8px 14px; margin: 0;">Close
+                    Session</button>
+            </div>
+
+            <h2>Training Dashboard</h2>
+            <div id="add-task-form" style="margin-bottom: 20px;">
+                <h3>New Training Task</h3>
+                <div class="form-group">
+                    <input type="text" id="task-title" placeholder="Exercise name">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="task-desc" placeholder="Description or repetitions">
+                </div>
+                <button onclick="crearTarea()">Add Task</button>
+            </div>
+
+            <div id="tasks-container"></div>
+        </div>
+    </div>
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="logo-title">
+                <img src="../logo/drillup.png"
+                    alt="Stylized running person in motion representing athleticism and energy, used as the DrillUp sports training website logo"
+                    width="140" height="140">
+                <h2>DrillUP</h2>
+            </div>
+            <div class="information">
+                <div class="list">
+                    <h3>Company</h3>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Press</li>
+                    </ul>
+                </div>
+                <div class="list">
+                    <h3>Support</h3>
+                    <ul>
+                        <li>Help Center</li>
+                        <li>Contact Us</li>
+                        <li>FAQs</li>
+                    </ul>
+                </div>
+                <div class="list">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li>Privacy Policy</li>
+                        <li>Terms of Service</li>
+                        <li>Cookie Policy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Follow us on social media</p>
+            <div class="social-media">
+                <img src="../logo/facebook.png" alt="Facebook Logo" width="30" height="30">
+                <img src="../logo/x.png" alt="Twitter/X Logo" width="30" height="30">
+                <img src="../logo/instagram.png" alt="Instagram Logo" width="30" height="30">
+                <img src="../logo/youtube.png" alt="YouTube Logo" width="30" height="30">
+            </div>
+            <p>Copyright &copy; 2020-2025 DrillUp. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="../scripts/scripts.js"></script>
 </body>
 
 </html>

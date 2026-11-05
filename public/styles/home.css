@@ -2,9 +2,12 @@
 
 /* --------------------- Hero Section Styles --------------------- */
 .hero-section {
+  position: relative;
+  overflow: hidden;
   height: 100vh;
   width: 100%;
-  background-image: url('../images/heroSectionPicture.jpg');
+  background-image: linear-gradient(rgba(29, 53, 87, 0.6), rgba(29, 53, 87, 0.6)),
+    url('../images/sports_bg.mp4');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -26,7 +29,19 @@
   z-index: 0;
 }
 
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
 .hero-content {
+  position: relative;
+  z-index: 1;
   position: relative;
   max-width: 500px;
   /* Limit the width of the content */
@@ -35,6 +50,8 @@
 }
 
 .hero-content h1 {
+  color: #ffffff;
+  font-weight: bold;
   font-size: 4.5em;
   line-height: 1.2;
 }
