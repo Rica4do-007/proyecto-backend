@@ -1,7 +1,7 @@
-// 1. Configuración Global
+// 1. Global Configuration
 const API_URL = '/app';
 
-// 2. Funciones de Autenticación (Registro / Login)
+// 2. Authentication Functions (Register / Login)
 async function register() {
     const email = document.getElementById('reg-email').value;
     const password = document.getElementById('reg-password').value;
@@ -16,7 +16,7 @@ async function register() {
         const data = await res.json();
 
         if (res.ok) {
-            alert("Succesfully registered! Please log in.");
+            alert("Successfully registered! Please log in.");
             toggleAuthForms();
         } else {
             alert(data.message || "Registration failed. Please try again.");
@@ -42,18 +42,17 @@ async function login() {
 
         if (res.ok) {
             localStorage.setItem('token', data.token);
-            // After successful login, return to hero landing view with updated routine buttons
             showLandingView();
         } else {
-            alert(data.message || "Credenciales incorrectas");
+            alert(data.message || "Incorrect credentials");
         }
     } catch (error) {
-        console.error("Error en login:", error);
-        alert("Error de conexión al intentar iniciar sesión.");
+        console.error("Login error:", error);
+        alert("Connection error while trying to log in.");
     }
 }
 
-// 3. Gestión de Tareas (CRUD)
+// 3. Task Management Functions (CRUD)
 async function crearTarea() {
     const title = document.getElementById('task-title').value;
     const description = document.getElementById('task-desc').value;
@@ -101,8 +100,8 @@ async function cargarTareas() {
                 container.innerHTML += `
                     <div class="card">
                         <h3>${t.title}</h3>
-                        <p>${t.description || 'Sin descripción'}</p>
-                        <p><strong>Estado:</strong> <span class="status-${t.status}">${t.status}</span></p>
+                        <p>${t.description || 'No description'}</p>
+                        <p><strong>Status:</strong> <span class="status-${t.status}">${t.status}</span></p>
                         
                         <div class="actions">
                             <button class="btn-proceso" onclick="actualizarEstado('${t._id}', 'in_progress')">⏳ In Progress</button>
@@ -114,7 +113,7 @@ async function cargarTareas() {
             });
         }
     } catch (error) {
-        console.error("Error cargando tareas:", error);
+        console.error("Error loading tasks:", error);
     }
 }
 
@@ -162,7 +161,7 @@ async function eliminarTarea(id) {
     }
 }
 
-// 4. Interfaz y Control de Vistas (SPA Flow)
+// 4. Interface Management: Show/Hide Sections
 function showAuthView() {
     document.getElementById('landing-section').classList.add('hidden');
     document.getElementById('auth-section').classList.remove('hidden');
@@ -186,17 +185,9 @@ function showDashboardView() {
 function handleProfileClick() {
     const token = localStorage.getItem('token');
     if (token) {
-        if (typeof showTaskView === 'function') {
-            showTaskView();
-        } else {
-            window.location.href = 'profile.html';
-        }
+        showDashboardView();
     } else {
-        if (typeof showAuthView === 'function') {
-            showAuthView();
-        } else {
-            window.location.href = 'auth.html';
-        }
+        showAuthView();
     }
 }
 
@@ -208,38 +199,46 @@ function toggleAuthForms(event) {
 
 function logout() {
     localStorage.removeItem('token');
+    updateUIState();
     showLandingView();
 }
 
-// Inside your existing UI management logic or when login state changes:
+// UI State Manager
+
 function updateUIState() {
     const token = localStorage.getItem('token');
     const profileText = document.getElementById('profile-btn-text');
+    const profileImg = document.getElementById('profile-icon-img');
     const heroButtonsContainer = document.getElementById('hero-buttons-container');
 
     if (token) {
-        // User is LOGGED IN: Change text to account view and show routine buttons
-        if (profileText) profileText.innerText = "My Account";
+        // --- LOGGED IN STATE: Show ONLY the profile icon ---
+        if (profileText) profileText.style.display = 'none';
+        if (profileImg) profileImg.style.display = 'inline-block';
         
         if (heroButtonsContainer) {
             heroButtonsContainer.innerHTML = `
-                <button onclick="showDashboardView()" class="hero-btn">Build your Routine</button>
-                <button onclick="alert('Opening library of guides and videos...')" class="hero-btn" style="background-color: var(--secondary-color);">Browse Library</button>
+                <button onclick="showDashboardView()" class="hero-btn-orange">Build your Routine</button>
+                <button onclick="alert('Opening library...')" class="hero-btn-blue">Browse Library →</button>
             `;
         }
     } else {
-        // User is LOGGED OUT: Show "Sign Up" text and default get started button
-        if (profileText) profileText.innerText = "Sign Up";
+        // --- LOGGED OUT STATE: Show ONLY "Sign Up" text ---
+        if (profileText) {
+            profileText.style.display = 'inline';
+            profileText.innerText = "Sign Up";
+        }
+        if (profileImg) profileImg.style.display = 'none';
         
         if (heroButtonsContainer) {
             heroButtonsContainer.innerHTML = `
-                <button onclick="showAuthView()" class="hero-btn">Get Started</button>
+                <button onclick="showAuthView()" class="hero-btn-orange">Get Started</button>
             `;
         }
     }
 }
 
-// 5. Inicialización al cargar la página
+// 5. Initialization: Update UI state on page load
 document.addEventListener("DOMContentLoaded", () => {
     updateUIState();
 });

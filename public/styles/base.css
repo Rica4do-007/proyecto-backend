@@ -12,107 +12,251 @@ body {
 
 /* --------------------- Header Section Styles --------------------- */
 .header-section {
-  display: flex;
-  align-items: center;
-  background-color: #f95738;
-  padding: 0.5em 2em;
-  justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 15px 30px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+    box-sizing: border-box;
+}
+
+.header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hamburger-icon {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
 }
 
 .logo-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  /* space between img and h1 */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-title img {
+    filter: invert(1);
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .logo-title h1 {
-  font-family: 'Bebas Neue', Arial, sans-serif;
-  color: #0d3b66;
-  letter-spacing: 2px;
-  font-weight: 400;
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    color: #ff4500;
+    font-size: 1.8rem;
+    margin: 0;
+    letter-spacing: 2px;
+    font-weight: 400;
 }
 
-.mobile-menu.menu-open {
-  display: flex;
-  /* Override display: none to show the menu */
-  flex-direction: column;
-  /* Stack links vertically */
-  position: absolute;
-  /* Take it out of the normal flow */
-  top: 60px;
-  /* Position it just below the header */
-  left: 0;
-  width: 100%;
-  background-color: #f95738;
-  /* Use your header color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 100;
+/* Search Bar Styles */
+.header-search {
+    position: relative;
+    width: 350px;
 }
 
-nav {
-  display: flex;
-  gap: 15px;
-  flex-grow: 1;
-  justify-content: center;
+.header-search input {
+    width: 100%;
+    padding: 8px 15px 8px 35px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: white;
+    outline: none;
 }
 
-nav a {
-  text-decoration: none;
-  padding: 8px 15px;
-  border-radius: 50px;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 1.1em;
-  border: none;
-  color: #000000;
-  transition: background-color 0.2s ease, box-shadow 0.5s ease, transform 0.5s ease;
+.header-search input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
-nav a:hover {
-  background-color: #a54a00;
-  transform: scale(1.03);
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.header-icons {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  /* Space between the profile and menu icons */
+/* Right Icons & Auth Elements */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.header-icons a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  text-decoration: none;
-  transition: background-color 0.2s ease, box-shadow 0.5s ease, transform 0.5s ease;
+.header-icon-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
-.header-icons a:hover {
-  background-color: #a54a00;
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+/* --------------------- Header Layout & Alignment Fix --------------------- */
+.header-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 15px 40px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent);
+    box-sizing: border-box;
 }
 
-.header-icons img {
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
+.header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-/* Responsive adjustments for the gap */
-@media (min-width: 1024px) {
-  .header-icons {
-    width: 150px;
-    /* Example: adjust this value based on your logo size */
-    visibility: visible;
-    justify-content: flex-end;
-    /* Align icons to the right edge of their container */
-  }
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hamburger-icon {
+    font-size: 1.4rem;
+    color: white;
+    text-decoration: none;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-title h1 {
+    font-family: 'Bebas Neue', Arial, sans-serif;
+    color: #ff4500;
+    font-size: 1.8rem;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+/* Search Bar Formatting */
+.header-search {
+    position: relative;
+    width: 320px;
+}
+
+.header-search input {
+    width: 100%;
+    padding: 7px 15px 7px 35px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Right Header Icons & Auth */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.header-icon-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+/* Sign Up Pill Button Style */
+.signup-pill-btn {
+    background-color: white;
+    color: #111;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Profile Icon Button Style */
+.profile-icon-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Navigation Row Links */
+.nav-links-row {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-bottom: 8px;
+}
+
+.nav-links-row a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-arrow {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    opacity: 0.85;
+}
+
+.nav-divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.hidden {
+    display: none !important;
 }
 
 /* --------------------- Footer Section Styles --------------------- */

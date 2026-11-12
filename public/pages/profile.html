@@ -14,23 +14,56 @@
 
 <body>
     <header class="header-section">
-        <div class="logo-title">
-            <img src="../logo/drillup.png"
-                alt="Stylized running person in motion representing athleticism and energy, used as the DrillUp sports training website logo"
-                width="50" height="50">
-            <h1>DrillUP</h1>
+        <!-- Top Header Row -->
+        <div class="header-top-row">
+            <div class="header-left">
+                <a href="javascript:void(0);" id="menuIcon" title="Open Menu" class="hamburger-icon">&#9776;</a>
+                <div class="logo-title">
+                    <img src="../logo/drillup.png" alt="DrillUp Logo" width="35" height="35">
+                    <h1>DRILLUP</h1>
+                </div>
+            </div>
+
+            <div class="header-search">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="" />
+            </div>
+
+            <div class="header-right">
+                <button class="header-icon-btn" title="Language/Region">🌐</button>
+
+                <!-- Clean Auth Container -->
+                <div id="auth-action-container">
+                    <button id="signup-pill-btn" onclick="showAuthView()" class="signup-pill-btn">Sign Up</button>
+                    <button id="profile-icon-btn" onclick="handleProfileClick()" class="profile-icon-btn hidden"
+                        title="Account">
+                        <img src="../icon/profile.png" alt="Profile" width="24" height="24" style="filter: invert(1);">
+                    </button>
+                </div>
+
+                <button class="header-icon-btn" title="Help">❓</button>
+            </div>
         </div>
-        <div class="header-icons">
-            <a href="help.html" title="Help">
-                <img src="../icon/help.png" alt="Help" width="40" height="40">
-            </a>
-            <a href="profile.html" title="Go to Profile">
-                <img src="../icon/profile.png" alt="Profile" width="40" height="40">
-            </a>
-            <a href="/settings.html" title="Go to Settings">
-                <img src="../icon/menu.png" alt="Menu" width="40" height="40">
-            </a>
-        </div>
+
+        <!-- Navigation Links Row -->
+        <nav id="mobileNav" class="nav-links-row">
+            <a href="index.html">Home <svg class="nav-arrow" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" />
+                </svg></a>
+            <a href="about-us.html">About Us <svg class="nav-arrow" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" />
+                </svg></a>
+            <a href="services.html">Services <svg class="nav-arrow" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" />
+                </svg></a>
+            <a href="contacts.html">Contacts <svg class="nav-arrow" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" />
+                </svg></a>
+            <a href="legal.html">Legal <svg class="nav-arrow" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" />
+                </svg></a>
+        </nav>
+        <div class="nav-divider"></div>
     </header>
     <main class="profile-main">
         <aside class="profile-sidebar">

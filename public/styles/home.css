@@ -50,6 +50,7 @@
 }
 
 .hero-content h1 {
+  font-family: 'Krona-One', sans-serif;
   color: #ffffff;
   font-weight: bold;
   font-size: 4.5em;
@@ -73,9 +74,38 @@
   cursor: pointer;
 }
 
-.hero-btn:hover {
-  transform: scale(1.1);
-  filter: brightness(1);
+.hero-btn-orange {
+    background-color: #e65c00;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hero-btn-orange:hover {
+    transform: scale(1.05);
+}
+
+.hero-btn-blue {
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hero-btn-blue:hover {
+    transform: scale(1.05);
 }
 
 /* --------------------- Services Section Styles --------------------- */

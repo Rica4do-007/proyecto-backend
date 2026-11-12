@@ -14,33 +14,60 @@
 </head>
 
 <body>
-    <!-- ========================================== -->
-    <!-- VIEW 1: MAIN LANDING PAGE (Visitor / Auth) -->
-    <!-- ========================================== -->
     <div id="landing-section" class="app-view">
         <header class="header-section">
-            <div class="logo-title">
-                <img src="../logo/drillup.png" alt="DrillUp Logo" width="50" height="50">
-                <h1>DrillUP</h1>
-            </div>
-            <nav id="mobileNav" class="mobile-menu">
-                <a href="index.html" title="Home">Home</a>
-                <a href="about-us.html" title="About Us">About Us</a>
-                <a href="services.html" title="Services">Services</a>
-            </nav>
-            <div class="header-icons">
-                <!-- Profile / Auth Action Button -->
-                <button id="profile-auth-btn" onclick="handleProfileClick()" class="profile-text-btn"
-                    style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 1rem;">
-                    <img id="profile-icon-img" src="../icon/profile.png" alt="Profile" width="35" height="35">
-                    <span id="profile-btn-text">Sign Up</span>
-                </button>
-                <a href="javascript:void(0);" id="menuIcon" title="Open Menu">
-                    <img src="../icon/menu.png" alt="Menu" width="40" height="40">
-                </a>
-            </div>
-        </header>
+            <!-- Top Header Row -->
+            <div class="header-top-row">
+                <div class="header-left">
+                    <a href="javascript:void(0);" id="menuIcon" title="Open Menu" class="hamburger-icon">&#9776;</a>
+                    <div class="logo-title">
+                        <img src="../logo/drillup.png" alt="DrillUp Logo" width="35" height="35">
+                        <h1>DRILLUP</h1>
+                    </div>
+                </div>
 
+                <div class="header-search">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="" />
+                </div>
+
+                <div class="header-right">
+                    <button class="header-icon-btn" title="Language/Region">🌐</button>
+
+                    <!-- Clean Auth Container -->
+                    <div id="auth-action-container">
+                        <button id="signup-pill-btn" onclick="showAuthView()" class="signup-pill-btn">Sign Up</button>
+                        <button id="profile-icon-btn" onclick="handleProfileClick()" class="profile-icon-btn hidden"
+                            title="Account">
+                            <img src="../icon/profile.png" alt="Profile" width="24" height="24"
+                                style="filter: invert(1);">
+                        </button>
+                    </div>
+
+                    <button class="header-icon-btn" title="Help">❓</button>
+                </div>
+            </div>
+
+            <!-- Navigation Links Row -->
+            <nav id="mobileNav" class="nav-links-row">
+                <a href="index.html">Home <svg class="nav-arrow" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></a>
+                <a href="about-us.html">About Us <svg class="nav-arrow" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></a>
+                <a href="services.html">Services <svg class="nav-arrow" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></a>
+                <a href="contacts.html">Contacts <svg class="nav-arrow" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></a>
+                <a href="legal.html">Legal <svg class="nav-arrow" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></a>
+            </nav>
+            <div class="nav-divider"></div>
+        </header>
         <main class="hero-section">
             <!-- Background Looping Video -->
             <video autoplay muted loop playsinline class="hero-video">
@@ -49,11 +76,12 @@
 
             <!-- Hero Content -->
             <div class="hero-content">
-                <h1>Dream Big,<br>Train Smart</h1>
-                <p>Unlock your full potential with the<br> right training, and the right mentors.</p>
+                <h1>Dream with Ambition,<br>Train with Precision</h1>
+                <p>Unlock your full potential with the right training, and the right mentors.</p>
 
-                <div id="hero-buttons-container">
-                    <button onclick="showAuthView()" class="hero-btn">Get Started</button>
+                <!-- Dynamic Hero Buttons container managed by JS -->
+                <div id="hero-buttons-container" class="hero-buttons-group">
+                    <button onclick="showAuthView()" class="hero-btn-orange">Get Started</button>
                 </div>
             </div>
         </main>
@@ -92,9 +120,6 @@
         </section>
     </div>
 
-    <!-- ========================================== -->
-    <!-- VIEW 2: AUTHENTICATION (Register / Login)  -->
-    <!-- ========================================== -->
     <div id="auth-section" class="app-view hidden">
         <div class="container" style="margin-top: 80px;">
             <button onclick="showLandingView()"
@@ -136,9 +161,6 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- VIEW 3: EXERCISE MANAGEMENT (Dashboard)    -->
-    <!-- ========================================== -->
     <div id="tasks-section" class="app-view hidden">
         <div class="container" style="max-width: 650px; margin-top: 80px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
