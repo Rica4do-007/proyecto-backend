@@ -1,29 +1,29 @@
 const jwt = require('jsonwebtoken');
 
-// Parte 3 - Pasos 6 y 7: Middleware de Autenticación (Seguridad)
-// Este archivo es el encargado de proteger las rutas privadas del proyecto.
+// Part 3 - Steps 6 and 7: Authentication Middleware (Security)
+// This file protects the project's private routes.
 module.exports = (req, res, next) => {
-  // 1. Obtener el token del header 'Authorization'
+  // 1. Get the token from the 'Authorization' header
   const authHeader = req.header('Authorization');
 
-  // Parte 6: Manejo de Errores (Token ausente)
+  // Part 6: Error Handling (Missing Token)
   if (!authHeader) {
-    return res.status(401).json({ mensaje: "Access denied, no token provided" });
+    return res.status(401).json({ message: "Access denied, no token provided" });
   }
 
-  // El formato suele ser "Bearer TOKEN", así que extraemos solo el token
+  // The format is usually "Bearer TOKEN", so extract only the token
   const token = authHeader.split(' ')[1];
 
   try {
-    // 2. Verificar el token usando la clave secreta (Seguridad de la Parte 3)
-    const cifrado = jwt.verify(token, process.env.JWT_SECRET);
+    // 2. Verify the token using the secret key (Security - Part 3)
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     
-    // Guardamos los datos del usuario en la petición para ser usados en la Parte 4 (Tareas)
-    req.user = cifrado; 
+    // Store user data in the request for use by the Tasks module
+    req.user = decodedToken; 
     
-    next(); // Continuar a la siguiente función (Controlador)
+    next(); // Continue to the next function (Controller)
   } catch (error) {
-    // Parte 6: Manejo de Errores (Token inválido o expirado)
-    res.status(400).json({ mensaje: "Invalid token" });
+    // Part 6: Error Handling (Invalid or expired token)
+    res.status(400).json({ message: "Invalid token" });
   }
 };

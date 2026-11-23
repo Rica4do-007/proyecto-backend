@@ -1,7 +1,7 @@
 const path = require('path');
 const cors = require('cors');
 const express = require('express');
-const conectarDB = require('./src/config/db');
+const connectDB = require('./src/config/db');
 const auth = require('./src/middlewares/authMiddleware');
 require('dotenv').config();
 
@@ -10,7 +10,7 @@ const landingPage = path.join(__dirname, 'public', 'pages', 'index.html');
 
 // 1. Conexión a la base de datos (Parte 1: Configuración de MongoDB)
 // Esta parte asegura que los modelos de la Parte 3 y 4 funcionen correctamente.
-conectarDB();
+connectDB();
 
 // 2. Importar rutas para los módulos del proyecto
 const authRoutes = require('./src/routes/authRoutes');
@@ -33,7 +33,7 @@ app.get('/app/health', (req, res) => {
 });
 
 // 5. Definición de rutas principales
-// Módulo de Usuarios (Parte 3) y Módulo de Tareas (Parte 4 - CRUD)
+// Users module (Part 3) and Tasks module (Part 4 - CRUD)
 app.use('/app/auth', authRoutes);
 app.use('/app/tasks', tasksRoutes);
 

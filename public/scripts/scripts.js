@@ -53,7 +53,7 @@ async function login() {
 }
 
 // 3. Task Management Functions (CRUD)
-async function crearTarea() {
+async function createTask() {
     const title = document.getElementById('task-title').value;
     const description = document.getElementById('task-desc').value;
     const token = localStorage.getItem('token');
@@ -70,14 +70,14 @@ async function crearTarea() {
     if (res.ok) {
         document.getElementById('task-title').value = '';
         document.getElementById('task-desc').value = '';
-        cargarTareas();
+        loadTasks();
     } else {
         const errorData = await res.json().catch(() => ({}));
         alert(`Error creating task: ${errorData.message || "Invalid input"}`);
     }
 }
 
-async function cargarTareas() {
+async function loadTasks() {
     const token = localStorage.getItem('token');
     if (!token) return;
 
@@ -93,10 +93,10 @@ async function cargarTareas() {
         if (!container) return;
         container.innerHTML = '';
 
-        const listaDeTareas = data.tasks || data.tareas || data.data || (Array.isArray(data) ? data : null);
+        const taskList = data.tasks || data.data || (Array.isArray(data) ? data : null);
 
-        if (listaDeTareas && Array.isArray(listaDeTareas)) {
-            listaDeTareas.forEach(t => {
+        if (taskList && Array.isArray(taskList)) {
+            taskList.forEach(t => {
                 container.innerHTML += `
                     <div class="card">
                         <h3>${t.title}</h3>
@@ -104,9 +104,9 @@ async function cargarTareas() {
                         <p><strong>Status:</strong> <span class="status-${t.status}">${t.status}</span></p>
                         
                         <div class="actions">
-                            <button class="btn-proceso" onclick="actualizarEstado('${t._id}', 'in_progress')">⏳ In Progress</button>
-                            <button class="btn-hecho" onclick="actualizarEstado('${t._id}', 'done')">✅ Done</button>
-                            <button class="delete-btn" onclick="eliminarTarea('${t._id}')">🗑️ Delete</button>
+                            <button class="btn-proceso" onclick="updateTaskStatus('${t._id}', 'in_progress')">⏳ In Progress</button>
+                            <button class="btn-hecho" onclick="updateTaskStatus('${t._id}', 'done')">✅ Done</button>
+                            <button class="delete-btn" onclick="deleteTask('${t._id}')">🗑️ Delete</button>
                         </div>
                     </div>
                 `;
@@ -117,7 +117,7 @@ async function cargarTareas() {
     }
 }
 
-async function actualizarEstado(id, nuevoEstado) {
+async function updateTaskStatus(id, newStatus) {
     const token = localStorage.getItem('token');
 
     try {
@@ -127,11 +127,11 @@ async function actualizarEstado(id, nuevoEstado) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ status: nuevoEstado })
+            body: JSON.stringify({ status: newStatus })
         });
 
         if (res.ok) {
-            cargarTareas();
+            loadTasks();
         } else {
             alert("Error updating status");
         }
@@ -140,7 +140,7 @@ async function actualizarEstado(id, nuevoEstado) {
     }
 }
 
-async function eliminarTarea(id) {
+async function deleteTask(id) {
     if (!confirm("Are you sure you want to delete this?")) return;
 
     const token = localStorage.getItem('token');
@@ -152,7 +152,7 @@ async function eliminarTarea(id) {
         });
 
         if (res.ok) {
-            cargarTareas();
+            loadTasks();
         } else {
             alert("The task could not be deleted. Please try again.");
         }
@@ -179,7 +179,7 @@ function showDashboardView() {
     document.getElementById('landing-section').classList.add('hidden');
     document.getElementById('auth-section').classList.add('hidden');
     document.getElementById('tasks-section').classList.remove('hidden');
-    cargarTareas();
+    loadTasks();
 }
 
 function handleProfileClick() {

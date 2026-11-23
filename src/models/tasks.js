@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const TaskSchema = new mongoose.Schema({
-  // Parte 4 - Paso 8: Definición de la estructura de la tarea
+  // Part 4 - Step 8: Define the Task structure
   title: { 
     type: String, 
-    // Parte 5: Validaciones de datos
-    required: true // Campo obligatorio para cumplir con la validación de la Parte 5
+    // Part 5: Data validations
+    required: true // Required field for validation
   },
   
   description: { 
@@ -14,7 +14,7 @@ const TaskSchema = new mongoose.Schema({
   
   status: { 
     type: String, 
-    // Parte 5: Validaciones de datos
+    // Part 5: Data validations
     enum: {
       values: ['pending', 'in_progress', 'done'],
       message: '{VALUE} it is not a valid status'
@@ -26,13 +26,13 @@ const TaskSchema = new mongoose.Schema({
     type: Date 
   },
   
-  // Parte 4 - Paso 8: Relación entre colecciones
+  // Part 4 - Step 8: Collection relationship
   user_id: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', // Referencia que establece la relación "1 usuario a muchas tareas"
+    ref: 'User', // Establishes a "1 user to many tasks" relationship
     required: true 
   }
 });
 
-// Parte 4 - Paso 8: Exportación del modelo para ser usado en el proyecto
+// Part 4 - Step 8: Export the model for use in the project
 module.exports = mongoose.model('Tasks', TaskSchema);

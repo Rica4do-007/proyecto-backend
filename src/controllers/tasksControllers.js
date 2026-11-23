@@ -1,55 +1,55 @@
 const Task = require('../models/tasks');
 
-// Parte 4 - Paso 9: Crear tarea (Operación Create)
-exports.crearTarea = async (req, res) => {
+// Part 4 - Step 9: Create Task
+exports.createTask = async (req, res) => {
   try {
     const { title, description } = req.body;
 
-    // Se asigna el ID del usuario desde el Token (Seguridad Parte 3)
-    const nuevaTarea = new Task({
+    // Assign the user ID from the token (Security - Part 3)
+    const newTask = new Task({
       title,
       description,
       user_id: req.user.id 
     });
 
-    await nuevaTarea.save();
-    res.status(201).json({ mensaje: "Task created successfully", tarea: nuevaTarea });
+    await newTask.save();
+    res.status(201).json({ message: "Task created successfully", task: newTask });
   } catch (error) {
-    // Parte 6: Manejo de Errores
-    res.status(500).json({ mensaje: "Error creating task", error: error.message });
+    // Part 6: Error Handling
+    res.status(500).json({ message: "Error creating task", error: error.message });
   }
 };
 
-// Parte 4 - Paso 10: Obtener tareas (Operación Read)
-exports.obtenerTareas = async (req, res) => {
+// Part 4 - Step 10: Retrieve Tasks
+exports.getTasks = async (req, res) => {
   try {
-    // Filtro por user_id para asegurar que solo vea sus propias tareas
-    const tareas = await Task.find({ user_id: req.user.id });
-    res.json(tareas);
+    // Filter by user_id so users only see their own tasks
+    const tasks = await Task.find({ user_id: req.user.id });
+    res.json(tasks);
   } catch (error) {
-    // Parte 6: Manejo de Errores
-    res.status(500).json({ mensaje: "Error retrieving tasks", error: error.message });
+    // Part 6: Error Handling
+    res.status(500).json({ message: "Error retrieving tasks", error: error.message });
   }
 };
 
-// Parte 4 - Paso 11: Actualizar tarea (Operación Update)
-exports.actualizarTarea = async (req, res) => {
+// Part 4 - Step 11: Update Task
+exports.updateTask = async (req, res) => {
   try {
-    const tarea = await Task.findOneAndUpdate(
-      { _id: req.params.id, user_id: req.user.id }, // Validación de propiedad
+    const task = await Task.findOneAndUpdate(
+      { _id: req.params.id, user_id: req.user.id }, // Ownership validation
       req.body, 
-      { new: true, runValidators: true } // <-- ¡AQUÍ LO AÑADES! Esto obligará a validar el enum
+      { new: true, runValidators: true }
     );
 
-    if (!tarea) return res.status(404).json({ mensaje: "Task not found" });
-    res.json({ mensaje: "Task updated", tarea });
+    if (!task) return res.status(404).json({ message: "Task not found" });
+    res.json({ message: "Task updated", task });
   } catch (error) {
-    // Parte 6: Manejo de Errores
-    // Como ahora Mongoose lanzará un error de validación (400), puedes atraparlo aquí de forma consistente
+    // Part 6: Error Handling
+    // Mongoose validation errors should consistently return status 400
     if (error.name === 'ValidationError') {
       return res.status(400).json({ 
         error: true, 
-        message: error.message // Ej: "terminado no es un estado válido"
+        message: error.message
       });
     }
 
@@ -60,15 +60,15 @@ exports.actualizarTarea = async (req, res) => {
   }
 };
 
-// Parte 4 - Paso 11: Eliminar tarea (Operación Delete)
-exports.eliminarTarea = async (req, res) => {
+// Part 4 - Step 11: Delete Task
+exports.deleteTask = async (req, res) => {
   try {
-    const tarea = await Task.findOneAndDelete({ _id: req.params.id, user_id: req.user.id });
+    const task = await Task.findOneAndDelete({ _id: req.params.id, user_id: req.user.id });
 
-    if (!tarea) return res.status(404).json({ mensaje: "Task not found" });
-    res.json({ mensaje: "Task deleted successfully" });
+    if (!task) return res.status(404).json({ message: "Task not found" });
+    res.json({ message: "Task deleted successfully" });
   } catch (error) {
-    // Parte 6: Manejo de Errores
-    res.status(500).json({ mensaje: "Error deleting task", error: error.message });
+    // Part 6: Error Handling
+    res.status(500).json({ message: "Error deleting task", error: error.message });
   }
 };

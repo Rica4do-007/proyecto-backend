@@ -2,49 +2,49 @@ const User = require('../models/users');
 const bcrypt = require('bcryptjs'); 
 const jwt = require('jsonwebtoken');
 
-// Parte 3 - Paso 5: Registro de Usuarios
-// Función para registrar un nuevo usuario en la base de datos
-exports.registrarUsuario = async (req, res) => {
+// Part 3 - Step 5: User Registration
+// Register a new user in the database
+exports.registerUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // El modelo 'User' se encarga de encriptar la contraseña (Seguridad Parte 3)
-    const nuevoUsuario = new User({ email, password });
-    await nuevoUsuario.save();
+    // The 'User' model encrypts the password (Security - Part 3)
+    const newUser = new User({ email, password });
+    await newUser.save();
 
-    res.status(201).json({ mensaje: "User registered successfully" });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    // Parte 6: Manejo de Errores (Campos inválidos o correo duplicado)
-    res.status(400).json({ mensaje: "Error registering user", error: error.message });
+    // Part 6: Error Handling (Invalid fields or duplicate email)
+    res.status(400).json({ message: "Error registering user", error: error.message });
   }
 };
 
-// Parte 3 - Paso 6: Inicio de Sesión (Login) y Generación de Token
+// Part 3 - Step 6: Login and Token Generation
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // 1. Verificación de existencia (Seguridad)
-    const usuario = await User.findOne({ email });
-    if (!usuario) {
-      return res.status(400).json({ mensaje: "User not found" });
+    // 1. Check whether the user exists (Security)
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
     }
 
-    // 2. Comparar la contraseña ingresada con el Hash de la base de datos (bcrypt)
-    const esValida = await bcrypt.compare(password, usuario.password);
-    if (!esValida) {
-      return res.status(400).json({ mensaje: "Incorrect Password" });
+    // 2. Compare the entered password with the hashed password (bcrypt)
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return res.status(400).json({ message: "Incorrect password" });
     }
 
-    // 3. Generación del Token JWT (Paso 7: Autenticación)
-    // Se usa la JWT_SECRET definida en el archivo .env
-    const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, {
+    // 3. Generate the JWT token (Step 7: Authentication)
+    // Uses JWT_SECRET defined in the .env file
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1h' 
     });
 
-    res.json({ mensaje: "Login successful", token });
+    res.json({ message: "Login successful", token });
   } catch (error) {
-    // Parte 6: Manejo de Errores de servidor
-    res.status(500).json({ mensaje: "Server error", error: error.message });
+    // Part 6: Server error handling
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
